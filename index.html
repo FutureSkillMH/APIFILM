@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body{
+
+        background-color: #000;
+      }
+        .ima {
+          width:300px;
+          height: 400px;  
+        }
+        h3 {
+        word-spacing: -4px;
+        }
+        #id01{
+        line-height: 35%;
+        text-align: center;
+        }
+        .interior{
+        display:inline-block;
+        text-align:center;
+        background-color:#000;
+        color:#FFF;
+        margin-bottom:5px;
+        max-width: 100%;
+        height: auto;
+        border: 2px solid #FFF;
+        text-shadow: 2px 2px 2px #FFF;
+        }
+        
+        </style>
+
+</head>
+<body>
+    <div id="id01"></div>
+
+    <script>
+    
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      //if (this.readyState == 4 && this.status == 200) {
+        const myArr = JSON.parse(this.responseText);
+          for(let i = 0; i < myArr.length; i++) {
+        document.getElementById("id01").innerHTML +=  `
+        <div class="interior" ><img class="ima" src="${myArr[i].image}" alt="${myArr[i].title}">
+        <h3> Título: ${myArr[i].title} </h3>
+        <h3>Director: ${myArr[i].director}</h3>
+        <p>Origen: ${myArr[i].original_title}</p> </div> `;
+        }  
+     // }  
+    };
+    xmlhttp.open("GET","https://ghibliapi.herokuapp.com/films", true);
+    xmlhttp.send();
+    
+    </script> 
+</body>
+</html>
+
+
+
